@@ -123,9 +123,10 @@ RUN cd /tmp && \
 
 RUN test "$(id postgres)" = "uid=26(postgres) gid=26(postgres) groups=26(postgres)" && \
     mkdir -p /var/lib/pgsql/data && \
-    mkdir -p /var/run/postgresql && \
-    /usr/libexec/fix-permissions /var/lib/pgsql && \
-    /usr/libexec/fix-permissions /var/run/postgresql
+    mkdir -p /var/run/postgresql
+
+RUN /usr/libexec/fix-permissions /var/lib/pgsql && \
+    /usr/libexec/fix-permissions /var/run/postgresql/
 
 # set the oracle library path
 ENV LD_LIBRARY_PATH /usr/lib/oracle/12.2/client64/lib:${LD_LIBRARY_PATH}
