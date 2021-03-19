@@ -100,11 +100,9 @@ ENV BASH_ENV=${CONTAINER_SCRIPTS_PATH}/scl_enable \
 VOLUME ["/var/lib/pgsql/data", "/var/run/postgresql"]
 
 # install the Oracle dependencies./tmp/oracle_fdw-ORACLE_FDW_2_0_0/oracle_fdw.control
-RUN mkdir -p /tmp/oraclelibs && cd /tmp/oraclelibs
+RUN mkdir -p /tmp/oraclelibs
 
-COPY rhel7.rh-postgresql96/oracle-instantclient12.2-basic-12.2.0.1.0-1.x86_64.rpm /tmp/oraclelibs
-
-COPY rhel7.rh-postgresql96/oracle-instantclient12.2-devel-12.2.0.1.0-1.x86_64.rpm /tmp/oraclelibs
+COPY rhel7.rh-postgresql96/*.rpm /tmp/oraclelibs
 
 RUN cd /tmp/oraclelibs && \
     rpm -Uvh oracle-instantclient12.2-basic-12.2.0.1.0-1.x86_64.rpm && \

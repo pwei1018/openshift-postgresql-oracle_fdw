@@ -5,3 +5,4 @@ openshift/postgis-secrets.yaml
 etc-pki-entitlement
 rhsm-conf
 rhsm-ca
+.history
