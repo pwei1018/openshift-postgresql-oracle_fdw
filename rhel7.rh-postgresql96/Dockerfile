@@ -105,8 +105,8 @@ RUN mkdir -p /tmp/oraclelibs
 COPY rhel7.rh-postgresql96/*.rpm /tmp/oraclelibs
 
 RUN cd /tmp/oraclelibs && \
-    rpm -Uvh oracle-instantclient12.2-basic-12.2.0.1.0-1.x86_64.rpm && \
-    rpm -Uvh oracle-instantclient12.2-devel-12.2.0.1.0-1.x86_64.rpm
+    rpm -Uvh oracle-instantclient12.2-basic-12.2.0.1.0-1.x86.rpm && \
+    rpm -Uvh oracle-instantclient12.2-devel-12.2.0.1.0-1.x86.rpm
 
 COPY root /
 
