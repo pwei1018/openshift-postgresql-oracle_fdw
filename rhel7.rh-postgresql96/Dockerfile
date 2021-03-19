@@ -19,19 +19,19 @@ ENV POSTGIS_EXTENSION=Y \
 
 ENV SUMMARY="PostgreSQL is an advanced Object-Relational database management system" \
     DESCRIPTION="PostgreSQL is an advanced Object-Relational database management system (DBMS). \
-The image contains the client and server programs that you'll need to \
-create, run, maintain and access a PostgreSQL DBMS server."
+    The image contains the client and server programs that you'll need to \
+    create, run, maintain and access a PostgreSQL DBMS server."
 
 LABEL summary=$SUMMARY \
-      description="$DESCRIPTION" \
-      io.k8s.description="$DESCRIPTION" \
-      io.k8s.display-name="PostgreSQL 9.6" \
-      io.openshift.expose-services="5432:postgresql" \
-      io.openshift.tags="database,postgresql,postgresql96,rh-postgresql96,postgis,postgis24" \
-      name="rhscl/postgresql-96-rhel7" \
-      com.redhat.component="rh-postgresql96-docker" \
-      version="9.6" \
-      release="1"
+    description="$DESCRIPTION" \
+    io.k8s.description="$DESCRIPTION" \
+    io.k8s.display-name="PostgreSQL 9.6" \
+    io.openshift.expose-services="5432:postgresql" \
+    io.openshift.tags="database,postgresql,postgresql96,rh-postgresql96,postgis,postgis24" \
+    name="rhscl/postgresql-96-rhel7" \
+    com.redhat.component="rh-postgresql96-docker" \
+    version="9.6" \
+    release="1"
 
 EXPOSE 5432
 
@@ -100,9 +100,13 @@ ENV BASH_ENV=${CONTAINER_SCRIPTS_PATH}/scl_enable \
 VOLUME ["/var/lib/pgsql/data", "/var/run/postgresql"]
 
 # install the Oracle dependencies./tmp/oracle_fdw-ORACLE_FDW_2_0_0/oracle_fdw.control
-RUN mkdir -p /tmp/oraclelibs && cd /tmp/oraclelibs && \
-    wget -nv --no-check-certificate -c --header "Cookie: oraclelicense=accept-securebackup-cookie" https://download.oracle.com/otn/linux/instantclient/121020/oracle-instantclient12.2-basic-12.2.0.1.0-1.x86_64.rpm && \
-    wget -nv --no-check-certificate -c --header "Cookie: oraclelicense=accept-securebackup-cookie" https://download.oracle.com/otn/linux/instantclient/121020/oracle-instantclient12.2-devel-12.2.0.1.0-1.x86_64.rpm && \
+RUN mkdir -p /tmp/oraclelibs && cd /tmp/oraclelibs
+
+COPY ./oracle-instantclient12.2-basic-12.2.0.1.0-1.x86_64.rpm /tmp/oraclelibs
+
+COPY ./oracle-instantclient12.2-devel-12.2.0.1.0-1.x86_64.rpm /tmp/oraclelibs
+
+RUN cd /tmp/oraclelibs && \
     rpm -Uvh oracle-instantclient12.2-basic-12.2.0.1.0-1.x86_64.rpm && \
     rpm -Uvh oracle-instantclient12.2-devel-12.2.0.1.0-1.x86_64.rpm
 
